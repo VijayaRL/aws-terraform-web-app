@@ -13,3 +13,11 @@ Terraform Apply
 terraform init -var-file="dev.tfvars"
 terraform apply -var-file="dev.tfvars"
 ```
+
+### Build and Push the docker image to DockerHub
+
+```
+docker build -t vijayalakshman/httpd_webserver:latest .
+docker push -t vijayalakshman/httpd_webserver:latest
+```
+
