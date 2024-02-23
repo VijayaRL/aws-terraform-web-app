@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.name }}
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Hello World</title>
+    </head>
+    <body>
+        <h1>Hello LineTen</h1>
+    </body>
+    </html>
