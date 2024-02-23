@@ -58,3 +58,10 @@ kubectl create ns web-app
 kubectl -n web-app create secret docker-registry docker-login --docker-server=https://index.docker.io/v1/ --docker-username= --docker-password= --docker-email=
 kubectl apply -f web-app.yaml
 ```
+
+### Access web application 
+
+```
+kubectl get svc -n web-app
+http://<load-balancer>/index.html
+```
