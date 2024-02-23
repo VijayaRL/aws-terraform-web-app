@@ -1,0 +1,65 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      # Git style checks
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-vcs-permalinks
+      - id: forbid-new-submodules
+      #- id: no-commit-to-branch
+
+      # Common errors
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+        exclude: CHANGELOG.md
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-executables-have-shebangs
+
+      # Cross platform checks
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+      # Security checks
+      - id: detect-aws-credentials
+        args: ['--allow-missing-credentials']
+      - id: detect-private-key
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.83.6 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+    hooks:
+      # Terraform formatting
+      - id: terraform_fmt
+        args:
+          - --args=-no-color
+          - --args=-diff
+          - --args=-write=false
+      # Terraform documentation generation
+      - id: terraform_docs
+        args:
+          - --hook-config=--path-to-file=README.md # Valid UNIX path. I.e. ../TFDOC.md or docs/README.md etc.
+          - --hook-config=--add-to-existing-file=true # Boolean. true or false
+          - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
+      # Terraform linting
+      - id: terraform_tflint
+        args:
+          - '--args=--only=terraform_deprecated_interpolation'
+          - '--args=--only=terraform_deprecated_index'
+          - '--args=--only=terraform_unused_declarations'
+          - '--args=--only=terraform_comment_syntax'
+          - '--args=--only=terraform_documented_variables'
+          - '--args=--only=terraform_typed_variables'
+          - '--args=--only=terraform_module_pinned_source'
+          - '--args=--only=terraform_workspace_remote'
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.27.1
+    hooks:
+      # JSON Schema checks for GitHub workflows
+      - id: check-github-workflows
+        args: ["--verbose"]
+      # JSON Schema checks for GitHub actions
+      - id: check-github-actions
