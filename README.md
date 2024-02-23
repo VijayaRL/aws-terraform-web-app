@@ -48,3 +48,13 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 kubectl get svc -n argocd
 https://<<External DNS of argocd server>>/
 ```
+
+### Run Argocd application
+
+Create docker secret first 
+
+```
+kubectl create ns web-app
+kubectl -n web-app create secret docker-registry docker-login --docker-server=https://index.docker.io/v1/ --docker-username= --docker-password= --docker-email=
+kubectl apply -f web-app.yaml
+```
